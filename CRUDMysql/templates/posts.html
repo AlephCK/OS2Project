@@ -1,0 +1,50 @@
+{% extends "master.html" %}
+<!--heredamos el bloque title-->
+{% block title %}
+ Post List
+{% endblock %}
+<!--finaliza el bloque title-->
+
+<!--heredamos el bloque content-->
+{% block content %}
+<div class="row">
+    <!-- mostramos los mensajes flash -->
+    {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if posts|length > 0 %}
+                <h2>Clientes</h2>
+                {% for post in posts %}
+                     <div class="col-md-12" style="margin-bottom: 6px">
+                        <div class="col-md-8">
+                            Title: {{ post.title }}, Url: {{ post.url }}, Content: {{ post.content }}
+                         </div>
+                         <div class="col-md-4">
+                             <a href="{% url 'update_post' post.id %}" class="btn btn-success">Update</a>
+                              <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Remove</a>
+                         </div>
+                     </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay Clientes</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!--finaliza el bloque content-->
+<!--heredamos el bloque footer-->
+{% block footer %}
+ <div class="navbar navbar-inverse navbar-fixed-bottom">
+ <div class="text-center" style="padding-top: 12px">
+ <small style="color: #fff"></small>
+     </div>
+ </div>
+{% endblock %}
+<!--finaliza el bloque footer-->
